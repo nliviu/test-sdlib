@@ -1,6 +1,6 @@
 author: Liviu Nicolescu <nliviu@gmail.com>
 description: sdlib test app
-version: 1.1
+version: 1.2
 
 libs_version: ${mos.version}
 modules_version: ${mos.version}
@@ -20,10 +20,19 @@ filesystem:
 
 config_schema:
  - ["debug.level", 2]
+ # hardwired for Wemos D32 Pro
+ #- ["sd_spi.pin_miso", 19]
+ #- ["sd_spi.pin_mosi", 23]
+ #- ["sd_spi.pin_clk", 18]
+ #- ["sd_spi.pin_cs", 4]
+
+ # hardwired for TTGO Camera Plus
+ #- ["sd_spi.pin_miso", 22]
+ #- ["sd_spi.pin_mosi", 19]
+ #- ["sd_spi.pin_clk", 21]
+ #- ["sd_spi.pin_cs", 0]
 
 libs:
-  - origin: https://github.com/mongoose-os-libs/boards
-  - origin: https://github.com/mongoose-os-libs/ca-bundle
   - origin: https://github.com/mongoose-os-libs/rpc-service-config
   - origin: https://github.com/mongoose-os-libs/rpc-service-fs
   - origin: https://github.com/mongoose-os-libs/rpc-uart

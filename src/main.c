@@ -35,6 +35,29 @@ enum mgos_app_init_result mgos_app_init(void) {
         ("SD size=%llu kiB", mgos_sd_get_fs_size(SD_FS_UNIT_KILOBYTES)));
     LOG(LL_INFO,
         ("SD size=%llu MiB", mgos_sd_get_fs_size(SD_FS_UNIT_MEGABYTES)));
+    // Test write/read file
+    const char *fname = "/sd/test.txt";
+    LOG(LL_INFO, ("Write file"));
+    FILE *f = fopen(fname, "w");
+    const char *txt = "This is a test\n";
+    size_t txt_len = strlen(txt);
+    if (f != NULL) {
+      size_t written = fwrite(txt, 1, txt_len, f);
+      fclose(f);
+      LOG(LL_INFO, ("written: %d, txt_len: %d", (int) written, (int) txt_len));
+    } else {
+      LOG(LL_ERROR, ("Failed to open %s for writing!", fname));
+    }
+    LOG(LL_INFO, ("Read file"));
+    f = fopen(fname, "r");
+    if (f != NULL) {
+      char buf[64];
+      size_t read = fread(buf, 1, txt_len, f);
+      fclose(f);
+      LOG(LL_INFO, ("read: %d, txt_len: %d", (int) read, (int) txt_len));
+    } else {
+      LOG(LL_ERROR, ("Failed to open %s for reading!", fname));
+    }
   } else {
     LOG(LL_INFO, ("SD init ERROR!"));
   }
