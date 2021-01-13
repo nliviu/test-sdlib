@@ -19,7 +19,6 @@ filesystem:
   - fs
 
 config_schema:
- - ["sys.tz_spec", "EET-2EEST-3,M3.5.0/03:00:00,M10.5.0/04:00:00"]
  - ["debug.level", 2]
 
 libs:
