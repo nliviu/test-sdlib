@@ -18,7 +18,7 @@
 #include "mgos.h"
 #include "mgos_sd.h"
 
-struct mgos_sd* s_sd = NULL;
+struct mgos_sd *s_sd = NULL;
 
 enum mgos_app_init_result mgos_app_init(void) {
   s_sd = mgos_sd_open(false /* spi */, "/sd", false);
@@ -31,11 +31,13 @@ enum mgos_app_init_result mgos_app_init(void) {
     LOG(LL_INFO, ("%.*s", jsmb.len, jsmb.buf));
     mbuf_free(&jsmb);
     LOG(LL_INFO, ("SD size=%llu B", mgos_sd_get_fs_size(SD_FS_UNIT_BYTES)));
-    LOG(LL_INFO, ("SD size=%llu kiB", mgos_sd_get_fs_size(SD_FS_UNIT_KILOBYTES)));
-    LOG(LL_INFO, ("SD size=%llu MiB", mgos_sd_get_fs_size(SD_FS_UNIT_MEGABYTES)));
+    LOG(LL_INFO,
+        ("SD size=%llu kiB", mgos_sd_get_fs_size(SD_FS_UNIT_KILOBYTES)));
+    LOG(LL_INFO,
+        ("SD size=%llu MiB", mgos_sd_get_fs_size(SD_FS_UNIT_MEGABYTES)));
   } else {
     LOG(LL_INFO, ("SD init ERROR!"));
   }
-  
+
   return MGOS_APP_INIT_SUCCESS;
 }
